@@ -1,3 +1,3 @@
 # MvcMusicStore
 
-Following along wioth the Professional ASP.Net 5 book!
+Following along with the Professional ASP.Net 5 book!
