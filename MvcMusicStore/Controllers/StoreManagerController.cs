@@ -12,12 +12,12 @@ namespace MvcMusicStore.Controllers
 {
     public class StoreManagerController : Controller
     {
-        private MusicStoreDB db = new MusicStoreDB();
+        private MusicStoreDB _db = new MusicStoreDB();
 
         // GET: StoreManager
         public ActionResult Index()
         {
-            var albums = db.Albums.Include(a => a.Artist).Include(a => a.Genre);
+            var albums = _db.Albums.Include(a => a.Artist).Include(a => a.Genre);
             return View(albums.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace MvcMusicStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
+            Album album = _db.Albums.Find(id);
             if (album == null)
             {
                 return HttpNotFound();
@@ -39,8 +39,8 @@ namespace MvcMusicStore.Controllers
         // GET: StoreManager/Create
         public ActionResult Create()
         {
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name");
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
+            ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
+            ViewBag.GenreId = new SelectList(_db.Genres, "GenreId", "Name");
             return View();
         }
 
@@ -53,13 +53,13 @@ namespace MvcMusicStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Albums.Add(album);
-                db.SaveChanges();
+                _db.Albums.Add(album);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name", album.ArtistId);
+            ViewBag.GenreId = new SelectList(_db.Genres, "GenreId", "Name", album.GenreId);
             return View(album);
         }
 
@@ -70,13 +70,13 @@ namespace MvcMusicStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
+            Album album = _db.Albums.Find(id);
             if (album == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name", album.ArtistId);
+            ViewBag.GenreId = new SelectList(_db.Genres, "GenreId", "Name", album.GenreId);
             return View(album);
         }
 
@@ -89,12 +89,12 @@ namespace MvcMusicStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(album).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(album).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name", album.ArtistId);
+            ViewBag.GenreId = new SelectList(_db.Genres, "GenreId", "Name", album.GenreId);
             return View(album);
         }
 
@@ -105,7 +105,7 @@ namespace MvcMusicStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
+            Album album = _db.Albums.Find(id);
             if (album == null)
             {
                 return HttpNotFound();
@@ -118,9 +118,9 @@ namespace MvcMusicStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Album album = db.Albums.Find(id);
-            db.Albums.Remove(album);
-            db.SaveChanges();
+            Album album = _db.Albums.Find(id);
+            _db.Albums.Remove(album);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -128,7 +128,7 @@ namespace MvcMusicStore.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
