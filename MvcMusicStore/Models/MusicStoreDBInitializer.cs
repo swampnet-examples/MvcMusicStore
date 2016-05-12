@@ -12,12 +12,22 @@ namespace MvcMusicStore.Models
 		{
 			context.Artists.Add(new Artist() { Name = "Al Di Meola" });
 			context.Genres.Add(new Genre() { Name = "Jazz" });
-			context.Albums.Add(new Album()
+			context.Albums.AddRange(new[] 
 			{
-				 Artist = new Artist() { Name = "Rush"},
-				 Genre = new Genre() { Name = "Rock" },
-				 Price = 9.99M,
-				 Title = "Caravan"
+				new Album()
+				{
+					 Artist = new Artist() { Name = "Rush"},
+					 Genre = new Genre() { Name = "Rock" },
+					 Price = 9.99M,
+					 Title = "Caravan"
+				},
+				new Album()
+				{
+					Artist = new Artist() { Name = "Faith No More" },
+					Genre = new Genre() { Name = "Metal" },
+					Price = 9.99M,
+					Title = "Angel Dust"
+				}
 			});
 
 			base.Seed(context);

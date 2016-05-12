@@ -17,18 +17,4 @@ namespace MvcMusicStore.Models
 		public virtual Genre Genre { get; set; }
 		public virtual Artist Artist { get; set; }
 	}
-
-	public class Artist
-	{
-		public virtual int ArtistId { get; set; }
-		public virtual string Name { get; set; }
-	}
-
-	public class Genre
-	{
-		public virtual int GenreId { get; set; }
-		public virtual string Name { get; set; }
-		public virtual string Description { get; set; }
-		public virtual List<Album> Albums { get; set; }
-	}
 }
