@@ -41,5 +41,11 @@ namespace MvcMusicStore.Controllers
 		{
 			return View();
 		}
+
+
+		public ActionResult SomePartial(string message)
+		{
+			return View();
+		}
 	}
 }

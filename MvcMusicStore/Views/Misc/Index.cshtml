@@ -36,4 +36,13 @@
 
 </table>
 
+
 @Html.ActionLink("Some test", "Test")
+
+@* Pull in partial 'SomePartial' -view *@
+
+@Html.Partial("SomePartial")
+
+@* Pull in view from 'SomePartial' Action - Returns a Partial view *@
+
+@Html.Action("SomePartial", new { message = "Some Message" })
