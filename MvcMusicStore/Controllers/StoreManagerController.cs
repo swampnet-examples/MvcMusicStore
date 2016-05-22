@@ -124,7 +124,26 @@ namespace MvcMusicStore.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+
+		public ActionResult DailyDeal()
+		{
+			var album = GetDailyDeal();
+
+			return PartialView("_DailyDeal", album);
+		}
+
+
+		private Album GetDailyDeal()
+		{
+			var album = _db.Albums.OrderBy(a => Guid.NewGuid()).First();
+
+			album.Price *= 0.5M;
+
+			return album;
+		}
+
+
+		protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
